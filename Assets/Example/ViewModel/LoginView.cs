@@ -16,32 +16,22 @@ namespace Example.ViewModel
         private void Start()
         {
             mViewModel = new LoginViewModel();
-
-
-            mTips = transform.Find("Panel/Tips").GetComponent<Text>();
-            mInputName = transform.Find("Panel/InputName").GetComponent<InputField>();
-
-            Old();
-//            mViewModel.Tips.SubscribeToText(mTips);
-//            mInputName.OnEndEditAsObservable().Subscribe(x => mViewModel.InputNameCommand.Execute(x));
+            BindUI();
+            BindEvent();
         }
 
 
-        private void Old()
+        private void BindEvent()
         {
-            mTips.text = "请输入密码";
+            mViewModel.Tips.SubscribeToText(mTips);
+            mInputName.OnEndEditAsObservable().Subscribe(x => mViewModel.InputNameCommand.Execute(x));
+        }
 
-            mInputName.onEndEdit.AddListener(name =>
-            {
-                if (name.Equals("ABC"))
-                {
-                    mTips.text = "密码输入正确";
-                }
-                else
-                {
-                    mTips.text = "密码输入错误";
-                }
-            });
+
+        private void BindUI()
+        {
+            mTips = transform.Find("Panel/Tips").GetComponent<Text>();
+            mInputName = transform.Find("Panel/InputName").GetComponent<InputField>();
         }
     }
 }
