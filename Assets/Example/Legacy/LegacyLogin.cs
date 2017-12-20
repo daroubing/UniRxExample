@@ -1,4 +1,4 @@
-﻿using Example.ViewModel;
+using Example.ViewModel;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,24 +10,19 @@ namespace Example.Legacy
     {
         private Text mTips;
         private InputField mInputName;
-
-
         private void Start()
         {
             BindUI();
-
             BindEvent();
-
             Init();
         }
-
-
+        
+        //绑定UI
         private void BindUI()
         {
             mTips = transform.Find("Panel/Tips").GetComponent<Text>();
             mInputName = transform.Find("Panel/InputName").GetComponent<InputField>();
         }
-
 
         private void BindEvent()
         {
@@ -50,7 +45,6 @@ namespace Example.Legacy
 //                mTips.text = InputPassword(name);
 //            });
         }
-
 
         internal string InputPassword(string name)
         {

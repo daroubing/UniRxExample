@@ -10,7 +10,7 @@ namespace Example.ViewModel.Editor {
         {
             var viewModel = new LoginViewModel();
 
-            Observable.Return("ABC").Subscribe(x => viewModel.InputNameCommand.Execute(x));
+            Observable.Return("ABC").Subscribe(x => viewModel.InputPasswordCommand.Execute(x));
 
             Assert.AreEqual(LoginViewModel.SUCCESS_TIPS, viewModel.Tips.Value);
         }
