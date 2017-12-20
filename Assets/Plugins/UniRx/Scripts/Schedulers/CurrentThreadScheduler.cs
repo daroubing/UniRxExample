@@ -1,4 +1,4 @@
-﻿// this code is borrowed from RxOfficial(rx.codeplex.com) and modified
+// this code is borrowed from RxOfficial(rx.codeplex.com) and modified
 
 // Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
@@ -79,7 +79,7 @@ namespace UniRx
                 var si = new ScheduledItem(action, dt);
 
                 var queue = GetQueue();
-
+                //加入队列执行
                 if (queue == null)
                 {
                     queue = new SchedulerQueue(4);
@@ -107,6 +107,7 @@ namespace UniRx
             {
                 public static void Run(SchedulerQueue queue)
                 {
+                    //先进先执行
                     while (queue.Count > 0)
                     {
                         var item = queue.Dequeue();

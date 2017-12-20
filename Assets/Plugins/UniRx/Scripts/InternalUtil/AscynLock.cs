@@ -1,4 +1,4 @@
-﻿// this code is borrowed from RxOfficial(rx.codeplex.com) and modified
+// this code is borrowed from RxOfficial(rx.codeplex.com) and modified
 
 using System;
 using System.Collections.Generic;
@@ -29,6 +29,7 @@ namespace UniRx.InternalUtil
             var isOwner = false;
             lock (queue)
             {
+                //取消则不再处理
                 if (!hasFaulted)
                 {
                     queue.Enqueue(action);
@@ -37,6 +38,7 @@ namespace UniRx.InternalUtil
                 }
             }
 
+            //NOTE Byron 2017.12.20 只在第一次加入时执行
             if (isOwner)
             {
                 while (true)
@@ -46,6 +48,7 @@ namespace UniRx.InternalUtil
                     {
                         if (queue.Count > 0)
                             work = queue.Dequeue();
+                        //无工作退出
                         else
                         {
                             isAcquired = false;
@@ -53,12 +56,14 @@ namespace UniRx.InternalUtil
                         }
                     }
 
+                    //如果执行时间长,则影响后续
                     try
                     {
                         work();
                     }
                     catch
                     {
+                        //运行错误则退出
                         lock (queue)
                         {
                             queue.Clear();

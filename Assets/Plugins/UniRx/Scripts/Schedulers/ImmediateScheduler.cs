@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -29,6 +29,7 @@ namespace UniRx
 
             public IDisposable Schedule(TimeSpan dueTime, Action action)
             {
+                //立即执行
                 var wait = Scheduler.Normalize(dueTime);
                 if (wait.Ticks > 0)
                 {
