@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
+
+
 namespace UniRx.InternalUtil
 {
+    //UNKNOW Kun 2017.12.27 为什么要使用序列优先级队列?
     internal class PriorityQueue<T> where T : IComparable<T>
     {
         private static long _count = long.MinValue;
